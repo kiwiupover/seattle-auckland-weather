@@ -15,7 +15,6 @@ export default DS.RESTAdapter.extend({
       url: this.buildURL(type.typeKey, id),
       success:function(response){
         return response.data.current_condition.forEach(function(condition){ 
-          console.log('condition: ' + condition);
           return condition;
         });
       }

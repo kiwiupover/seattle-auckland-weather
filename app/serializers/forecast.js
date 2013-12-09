@@ -1,9 +1,9 @@
 export default DS.RESTSerializer.extend({
 
   extractSingle: function(store, type, payload, id, requestType) {
-    var forecast = payload.data.current_condition[0];
-        id = payload.data.request[0].query
-    forecast.id = id;
+    var forecast = payload.data.current_condition[0],
+        forecastId = payload.data.request[0].query;
+    forecast.id = forecastId;
 
     payload = { forecast: forecast};
 
@@ -17,7 +17,7 @@ export default DS.RESTSerializer.extend({
       hash.observationTime = hash.observation_time;
       hash.tempC = hash.temp_C;
       hash.tempF = hash.temp_F;
-      hash.weatherDesc = hash.weatherDesc[0].value
+      hash.weatherDesc = hash.weatherDesc[0].value;
       delete hash.observation_time;
       delete hash.temp_C;
       delete hash.temp_F;
