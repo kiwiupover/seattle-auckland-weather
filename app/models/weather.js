@@ -3,9 +3,9 @@
 // https://github.com/emberjs/data
 // http://emberjs.com/guides/models
 
-var Forecast = DS.Model.extend({
+export default DS.Model.extend({
   cloudcover: DS.attr('string'),
-  humidity: DS.attr('number'),
+  humidity: DS.attr('number'),  
   observationTime: DS.attr('string'),
   precipMM: DS.attr('number'),
   pressure: DS.attr('number'),
@@ -19,6 +19,3 @@ var Forecast = DS.Model.extend({
   windspeedKmph: DS.attr('number'),
   windspeedMiles: DS.attr('number')
 });
-
-
-export default Forecast;

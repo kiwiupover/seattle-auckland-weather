@@ -1,29 +1,38 @@
-export default DS.RESTSerializer.extend({
+export default DS.JSONSerializer.extend({
 
-  extractSingle: function(store, type, payload, id, requestType) {
-    var forecast = payload.data.current_condition[0],
-        forecastId = payload.data.request[0].query;
-    forecast.id = forecastId;
-
-    payload = { forecast: forecast};
-
-    return this._super(store, type, payload, id, requestType);
-  },
-
-  normalizeHash: {
-    // Next, normalize individual comments, which (after `extract`)
-    // are now located under `comments`
-    forecast: function(hash) {
-      hash.observationTime = hash.observation_time;
-      hash.tempC = hash.temp_C;
-      hash.tempF = hash.temp_F;
-      hash.weatherDesc = hash.weatherDesc[0].value;
-      delete hash.observation_time;
-      delete hash.temp_C;
-      delete hash.temp_F;
-      return hash;
-    }
+  extract: function(store, type, payload) {
+    // debugger;
+    console.log("the payload is %o", payload);
+    payload.id = 1; 
+    return payload;
   }
+
+  // extractSingle: function(store, type, payload, id, requestType) {
+  //   debugger;
+  //   var forecast = payload.data.current_condition[0],
+  //       forecastId = payload.data.request[0].query;
+  //   forecast.id = forecastId;
+
+  //   payload = { forecast: forecast};
+
+  //   return this._super(store, type, payload, id, requestType);
+  // },
+
+  // normalizeHash: {
+  //   // Next, normalize individual comments, which (after `extract`)
+  //   // are now located under `comments`
+  //   forecast: function(hash) {
+  //     debugger;
+  //     hash.observationTime = hash.observation_time;
+  //     hash.tempC = hash.temp_C;
+  //     hash.tempF = hash.temp_F;
+  //     hash.weatherDesc = hash.weatherDesc[0].value;
+  //     delete hash.observation_time;
+  //     delete hash.temp_C;
+  //     delete hash.temp_F;
+  //     return hash;
+  //   }
+  // }
 
 });
 
