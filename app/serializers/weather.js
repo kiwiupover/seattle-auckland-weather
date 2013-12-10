@@ -2,12 +2,33 @@ export default DS.JSONSerializer.extend({
 
   extract: function(store, type, payload) {
     var weatherCurrent = payload.weatherCurrent.current_observation;
-    var weatherForecast = payload.weatherForecast
+    var weatherForecastDay = payload.weatherForecast.forecast.txt_forecast.forecastday;
 
-    currentInfo.id = 1;
+    var days = [];
+    Ember.ArrayPolyfills.forEach.call(weatherForecastDay, function(day) {
+      console.log(day);
+      days.pushObject(day);
+    });
 
-    console.log(currentInfo);
-    return currentInfo;
+    var weather = {
+        tempC: weatherCurrent.temp_c, 
+        tempF: weatherCurrent.temp_f,
+        iconUrl: weatherCurrent.icon_url,
+        temperatureString: weatherCurrent.temperature_string,
+      };
+
+    var realWeather =  Ember.merge(weather, weatherCurrent);
+
+    var finalReturn = {
+      id: 1,
+      weather: realWeather,
+      days: days
+    };
+
+
+    window.console.log(finalReturn);
+    return finalReturn;
+
 
     // var returnedPayload = {
     //   id: 1,
