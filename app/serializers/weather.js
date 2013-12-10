@@ -2,6 +2,7 @@ export default DS.JSONSerializer.extend({
 
   extract: function(store, type, payload) {
     var weatherCurrent = payload.weatherCurrent.current_observation;
+
     var weatherForecastDay = payload.weatherForecast.forecast.txt_forecast.forecastday;
 
     var days = [];
