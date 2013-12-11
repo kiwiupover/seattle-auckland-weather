@@ -1,17 +1,17 @@
-<section role="main" id='bg' class='bg'>
-  <div class="row panel radius bg">
-    <div class="small-12 columns">
-      <h1>The forecast for {{id}}</h1>
-      <img {{bind-attr src=image}} width=100>
-      <ul class='inline-list'>
-        <li>weather: {{weather.weather}}</li>
-        <li>temperatureString: {{weather.temperatureString}}</li>
-        <li>icon: {{weather.icon}}</li>
-        <li>iconUrl: <img {{bind-attr src=weather.iconUrl}}></li>
-        <li>tempC: {{weather.tempC}}</li>
-        <li>tempF: {{weather.tempF}}</li>
-      </ul>
-      {{weather-forecast days=days}}
-    </div>
+<section role="main" id='bg' class='bg'></section>
+
+<div class="weather-panel bg">
+  <div class="small-12 columns">
+    <h1>The forecast for {{id}}</h1>
+    <ul class='inline-list'>
+      <li>weather: {{weather.weather}}</li>
+      <li>temperatureString: {{weather.temperatureString}}</li>
+      <li>icon: {{weather.icon}}</li>
+      <li>iconUrl: <img {{bind-attr src=weather.iconUrl}}></li>
+      <li>tempC: {{weather.tempC}}</li>
+      <li>tempF: {{weather.tempF}}</li>
+    </ul>
+    {{weather-forecast days=days}}
   </div>
-</section>
+</div>
+
