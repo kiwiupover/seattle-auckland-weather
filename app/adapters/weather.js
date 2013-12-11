@@ -33,12 +33,11 @@ export default DS.Adapter.extend({
 
   find: function(store, type, id) {
 
-    return new Promise(function(resolve, reject) {
-      return getJSON('http://autocomplete.wunderground.com/aq?query=Seattle').then(function(data) {
-        resolve(data);
-      });
+    return Ember.RSVP.hash({
+      weatherCurrent: getJSON(this.buildCurrentWeatherUrl(type, id)),
+      weatherForecast: getJSON(this.buildForecastWeatherUrl(type, id))
+      // imageApi: imageApi
     });
-    
 
   }
 });

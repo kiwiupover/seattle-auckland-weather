@@ -10,7 +10,7 @@ export default DS.Model.extend({
   temperatureString: DS.attr('string'),
   icon: DS.attr('string'),
   iconUrl: DS.attr('string'),
-  days: []
+  days: DS.attr('string')
 });
 
 
