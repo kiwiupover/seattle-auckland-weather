@@ -1,9 +1,9 @@
 export default DS.JSONSerializer.extend({
 
   extract: function(store, type, payload) {
-    var weatherCurrent = payload.weatherCurrent.current_observation;
-
-    var weatherForecastDay = payload.weatherForecast.forecast.txt_forecast.forecastday;
+    var weatherCurrent = payload.weatherCurrent.current_observation,
+        weatherForecastDay = payload.weatherForecast.forecast.txt_forecast.forecastday,
+        imageApi = payload.imageApi.photos;
 
     var days = [];
     Ember.ArrayPolyfills.forEach.call(weatherForecastDay, function(day) {
@@ -11,18 +11,19 @@ export default DS.JSONSerializer.extend({
     });
 
     var weather = {
-        tempC: weatherCurrent.temp_c, 
-        tempF: weatherCurrent.temp_f,
-        iconUrl: weatherCurrent.icon_url,
-        temperatureString: weatherCurrent.temperature_string,
-      };
+          tempC: weatherCurrent.temp_c, 
+          tempF: weatherCurrent.temp_f,
+          iconUrl: weatherCurrent.icon_url,
+          temperatureString: weatherCurrent.temperature_string,
+        };
 
     var realWeather =  Ember.merge(weather, weatherCurrent);
 
     var finalReturn = {
       id: 1,
       weather: realWeather,
-      days: days
+      days: days,
+      image: imageApi[0]
     };
 
 
@@ -43,6 +44,50 @@ export default DS.JSONSerializer.extend({
 });
 
 /*
+image =====================
+{
+   "current_page":1,
+   "total_pages":2844,
+   "total_items":2844,
+   "photos":[
+      {
+         "id":54543406,
+         "name":"Untitled",
+         "description":null,
+         "times_viewed":4,
+         "rating":66.3,
+         "created_at":"2013-12-10T07:51:30-05:00",
+         "category":8,
+         "privacy":false,
+         "width":4602,
+         "height":2986,
+         "votes_count":5,
+         "favorites_count":3,
+         "comments_count":0,
+         "nsfw":false,
+         "image_url":"http://ppcdn.500px.org/54543406/aedfc61af4e3ac7c62a6ce08ebf694b6d7fae7ab/2.jpg",
+         "images":[
+            {
+               "size":2,
+               "url":"http://ppcdn.500px.org/54543406/aedfc61af4e3ac7c62a6ce08ebf694b6d7fae7ab/2.jpg"
+            }
+         ],
+         "user":{
+            "id":3191513,
+            "username":"earlcook",
+            "firstname":"earl",
+            "lastname":"cook",
+            "city":"Auckland",
+            "country":"New Zealand ",
+            "fullname":"earl cook",
+            "userpic_url":"http://pacdn.500px.org/3191513/424398211cbb01597ce1f82e49423a41e732db0b/1.jpg?2",
+            "upgrade_status":0,
+            "followers_count":0,
+            "affection":17
+         }
+      }
+   ]
+}
 forecast ======== 
 {
    "response":{

@@ -7,7 +7,6 @@ function getJSON (url, dataType) {
       url: url,
       dataType: dataType,
       success: function(data) {
-        debugger;
         Ember.run(null, resolve, data);
       },
       error: function(err) {

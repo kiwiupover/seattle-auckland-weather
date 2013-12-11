@@ -10,7 +10,17 @@ export default DS.Model.extend({
   temperatureString: DS.attr('string'),
   icon: DS.attr('string'),
   iconUrl: DS.attr('string'),
-  days: DS.attr('string')
+  days: DS.attr('string'),
+  image: DS.attr('string'),
+
+  imageLarge: function(){
+    debugger;
+    var img = this.get('image.image_url'),
+        i = img.split('/');
+    
+    i[5] = '2048.jpg';
+    return i.join('/');
+  }.property('image.image_url')
 });
 
 
