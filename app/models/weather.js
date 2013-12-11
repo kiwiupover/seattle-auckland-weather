@@ -14,7 +14,6 @@ export default DS.Model.extend({
   image: DS.attr('string'),
 
   imageLarge: function(){
-    debugger;
     var img = this.get('image.image_url'),
         i = img.split('/');
     
