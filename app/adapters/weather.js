@@ -34,14 +34,23 @@ export default DS.Adapter.extend({
   build500pxUrl: function(type, id) {
     var key = '&consumer_key=DhbTTmWU8YhxvMxHRkNe9mRjYgmacI7zPi0ELX3t';
 
-    return 'https://api.500px.com/v1/photos/search?term=Auckland&only=landscapes&rpp=1' + key;
+    return 'https://api.500px.com/v1/photos/search?term=Honolulu&only=landscapes&rpp=1' + key;
+  },
+
+  buildSearch: function () {
+    var url = "https://autocomplete.wunderground.com/aq?query=Portland";
+    return $.getJSON(url + '&cb=callbackfunc', function(json) {
+        window.console.log(json);
+    });
+  },
+
+  callbackfunc: function(){
+    alert('Josh');
   },
   
-
   find: function(store, type, id) {
-
-
     return Ember.RSVP.hash({
+      // weatherSearch: this.buildSearch(),
       weatherCurrent: getJSON(this.buildCurrentWeatherUrl(type, id), 'jsonp'),
       weatherForecast: getJSON(this.buildForecastWeatherUrl(type, id), 'jsonp'),
       imageApi: getJSON(this.build500pxUrl(type, id), 'json')
