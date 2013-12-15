@@ -48,7 +48,7 @@
   content: "\e606";
 }
 .icon-cloudy:before {
-  content: "\e607";
+  content: "\e62b";
 }
 .icon-cloud:before {
   content: "\e608";
@@ -68,6 +68,15 @@
 .icon-cloud2:before {
   content: "\e60d";
 }
+.icon-partlycloudy:before {
+  content: "\e60a";
+}
+.icon-mostlycloudy:before {
+  content: "\e62b"; 
+}
+.icon-fog:before {
+  content: "\e629";
+}
 .icon-lightning:before {
   content: "\e60e";
 }
@@ -79,6 +88,9 @@
 }
 .icon-rainy:before {
   content: "\e611";
+}
+.icon-chancerain:before {
+  content: "\e60e"; 
 }
 .icon-windy2:before {
   content: "\e612";
