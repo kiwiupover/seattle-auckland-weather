@@ -1,5 +1,5 @@
 export default Ember.Component.extend({
-  searchTerm: "Seattle, WA",
+  searchTerm: "Seattle WA",
 
   actions: {
     search: function (val) {
