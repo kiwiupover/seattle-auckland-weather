@@ -4,8 +4,8 @@ export default Ember.Route.extend({
     // return this.store.find('weather', params.location_id);
   },
   actions: {
-    handleSubmit: function (value) {
-      console.log("the value is", value);
+    searchHandler: function (val) {
+      console.log("the search term from the router is", val);
     }
   }
 });

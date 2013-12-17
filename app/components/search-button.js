@@ -3,8 +3,8 @@ export default Ember.Component.extend({
 
   actions: {
     search: function (val) {
-      console.log("the search term in search-biutton.js is ", val);
-      this.sendAction("handleSearch", val);
+      window.console.log("the search term in search-biutton.js is ", val);
+      this.sendAction("searchMessage", val);
     }
   }
-})
+});
