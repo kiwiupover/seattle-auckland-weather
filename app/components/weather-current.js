@@ -6,5 +6,5 @@ export default Ember.Component.extend({
     this.$('#bg').foggy({
       blurRadius: 1
     });
-  }
+  },
 });
