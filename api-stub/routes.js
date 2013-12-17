@@ -57,17 +57,4 @@ module.exports = function(app) {
 
 	});
 
-  app.get('/api/forecast/:term', function (req, res) {
-
-    request.get(url).pipe(res);
-  });
-
-  app.get('/weather-forecast', function (req, res) {
-    request.get(apiUrlLookup.weatherForecastUrl).pipe(res);
-  });
-
-  app.get('/image-api', function (req, res) {
-    request.get(apiUrlLookup.imageApiUrl).pipe(res);
-  });
-
 };
