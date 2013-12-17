@@ -1,6 +1,9 @@
 export default Ember.Route.extend({
-  model: function(params) {
-    return this.store.find('weather', params.location_id);
+  actions: {
+    searchHandler: function (val) {
+      window.console.log("the search term from the search handler is", val);
+      this.transitionTo('/weather/' + encodeURIComponent(val));
+    }
   }
 });
 

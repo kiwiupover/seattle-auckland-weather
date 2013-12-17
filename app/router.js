@@ -1,7 +1,9 @@
 var Router = Ember.Router.extend(); // ensure we don't share routes between all Router instances
 
 Router.map(function() {
-  this.route('weather', { path: '/:location_id' });
+  this.resource('weather', function () {
+    this.route('search', { path: '/:term' });
+  });
 });
 
 Router.reopen({
