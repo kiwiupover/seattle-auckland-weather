@@ -1,11 +1,10 @@
 var Promise = Ember.RSVP.Promise;
 
-function getJSON (url, dataType) {
+function getJSON (url) {
   return new Promise(function(resolve, reject) {
-    Ember.$.ajax({
-      type: 'GET', 
+    Ember.$.ajax({ // jquery + runloop + promises = fun times
+      type: 'GET',
       url: url,
-      dataType: dataType,
       success: function(data) {
         Ember.run(null, resolve, data);
       },
@@ -17,37 +16,12 @@ function getJSON (url, dataType) {
 }
 
 export default DS.Adapter.extend({
-  host: 'http://api.wunderground.com',
-  namespace: "api/a7fc8ca637aa4a97",
-  key: 'a7fc8ca637aa4a97',
-
-  // http://api.wunderground.com/api/a7fc8ca637aa4a97/conditions/q/CA/San_Francisco.json
-
-  buildCurrentWeatherUrl: function(type, id) {
-    return this.host + '/' + this.namespace + '/conditions/q/' + id + '.json';
-  },
-
-  buildForecastWeatherUrl: function(type, id) {
-    return this.host + '/' + this.namespace + '/forecast/q/' + id + '.json';
-  },
-  
-  build500pxUrl: function(type, id) {
-    var key = '&consumer_key=DhbTTmWU8YhxvMxHRkNe9mRjYgmacI7zPi0ELX3t';
-
-    return 'https://api.500px.com/v1/photos/search?term=Auckland&only=landscapes&rpp=1' + key;
-  },
-  
-
   find: function(store, type, id) {
-
-
     return Ember.RSVP.hash({
       weatherCurrent: getJSON(this.buildCurrentWeatherUrl(type, id), 'jsonp'),
       weatherForecast: getJSON(this.buildForecastWeatherUrl(type, id), 'jsonp'),
       imageApi: getJSON(this.build500pxUrl(type, id), 'json')
     });
-
-
   }
 });
 
