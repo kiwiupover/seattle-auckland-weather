@@ -16,11 +16,9 @@ function getJSON (url) {
 }
 
 export default DS.Adapter.extend({
-  find: function(store, type, id) {
+  find: function(store, type, term) {
     return Ember.RSVP.hash({
-      weatherCurrent: {blah: 'ahah'},
-      weatherForecast: {blah: 'ahah'},
-      imageApi: {blah: 'ahah'}
+      weatherCurrent: getJSON(type + '/' + term)
     });
   }
 });
