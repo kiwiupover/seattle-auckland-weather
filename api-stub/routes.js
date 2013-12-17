@@ -3,13 +3,12 @@ var request = require('request')
 
 var get = Promise.promisify(request.get)
 
-
 var apiKeys = {
   wunderground: process.env.WUNDERGROUND_KEY,
-  '500px': process.env.FIVEHUNDRED_PX_KEY
+  fiveHundredPX: process.env.FIVEHUNDRED_PX_KEY
 };
 
-function buildUrl(type, lField) {
+function buildWeatherUrl(type, lField) {
   return 'http://api.wunderground.com/api/' +
           apiKeys.wunderground + '/' +
           type + '/' +
@@ -17,13 +16,22 @@ function buildUrl(type, lField) {
           '.json'
 }
 
+function build500pxUrl(nameField){
+  var key = '&consumer_key=' + apiKeys.fiveHundredPX;
+
+  return 'https://api.500px.com/v1/photos/search?term=' + nameField + '&only=landscapes&rpp=1' + key;
+}
+
 function weatherUrls(response) {
   var body = JSON.parse(response[1])
     , lField = body.RESULTS[0].l
+    , nameField = body.RESULTS[0].name;
 
   var weatherUrls = {
-    conditions: buildUrl('conditions', lField),
-    forecast: buildUrl('forecast', lField)
+    conditions: buildWeatherUrl('conditions', lField),
+    forecast: buildWeatherUrl('forecast', lField),
+    image500pxAPI: build500pxUrl(nameField),
+    location: nameField
   }
 
   console.log(weatherUrls);
@@ -38,16 +46,20 @@ function asJSON(responsePromise) {
 
 module.exports = function(app) {
 
+  console.log('Api keys: ', apiKeys);
+
 	app.get('/api/weather/:term', function (req, finalRes) {
     var term = req.params.term
       , wundergroundQueryUrl = 'http://autocomplete.wunderground.com/aq?query=' + term
 
     get(wundergroundQueryUrl).then(function (response) {
       return weatherUrls(response);
-    }).then(function (weatherUrls) {
+    }).then(function (weatherUrls, response) {
       return Promise.props({
         weatherConditions: asJSON(get(weatherUrls.conditions)),
-        weatherForecast: asJSON(get(weatherUrls.forecast))
+        weatherForecast: asJSON(get(weatherUrls.forecast)),
+        imageApi: asJSON(get(weatherUrls.image500pxAPI)),
+        location: weatherUrls.location
       })
     }).then(function(result) {
       finalRes.send(result)

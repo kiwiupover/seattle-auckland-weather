@@ -2,8 +2,9 @@ export default DS.JSONSerializer.extend({
 
   extract: function(store, type, payload) {
     var weatherConditions = payload.weatherConditions.current_observation,
-        weatherForecastDay = payload.weatherForecast.forecast.txt_forecast.forecastday;
-        // imageApi = payload.imageApi.photos;
+        weatherForecastDay = payload.weatherForecast.forecast.txt_forecast.forecastday,
+        imageApi = payload.imageApi.photos,
+        location = payload.location;
 
     var days = [];
     Ember.ArrayPolyfills.forEach.call(weatherForecastDay, function(day) {
@@ -23,7 +24,8 @@ export default DS.JSONSerializer.extend({
       id: 1,
       weather: realWeather,
       days: days,
-      // image: imageApi[0]
+      image: imageApi[0],
+      location: location
     };
 
 

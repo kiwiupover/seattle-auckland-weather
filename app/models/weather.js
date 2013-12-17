@@ -4,6 +4,7 @@
 // http://emberjs.com/guides/models
 
 export default DS.Model.extend({
+  location: DS.attr('string'),
   weather: DS.attr('string'),
   tempC: DS.attr('number'),
   tempF: DS.attr('number'),
