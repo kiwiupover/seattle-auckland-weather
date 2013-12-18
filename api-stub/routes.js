@@ -31,7 +31,7 @@ function weatherUrls(response) {
     conditions: buildWeatherUrl('conditions', lField),
     forecast: buildWeatherUrl('forecast', lField),
     image500pxAPI: build500pxUrl(nameField),
-    location: nameField
+    location: nameField // remove
   }
 
   console.log(weatherUrls);
@@ -59,7 +59,7 @@ module.exports = function(app) {
         weatherConditions: asJSON(get(weatherUrls.conditions)),
         weatherForecast: asJSON(get(weatherUrls.forecast)),
         imageApi: asJSON(get(weatherUrls.image500pxAPI)),
-        location: weatherUrls.location
+        location: weatherUrls.location // remove
       })
     }).then(function(result) {
       finalRes.send(result)
