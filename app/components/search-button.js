@@ -1,5 +1,11 @@
 export default Ember.Component.extend({
-  searchTerm: "Seattle WA",
+  searchTerm: null,
+
+  triggerSearch: function () {
+    // TODO this messes up returning to a route via url, always makes
+    // the goecoded route load instead
+    this.sendAction("searchMessage", this.get('searchTerm'));
+  }.on('didInsertElement'),
 
   actions: {
     search: function (val) {
