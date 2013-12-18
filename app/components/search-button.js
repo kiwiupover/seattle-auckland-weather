@@ -1,11 +1,22 @@
+import getJSON from "appkit/utils/get-json";
+
 export default Ember.Component.extend({
   searchTerm: null,
+  aProperty: "this should change",
 
   triggerSearch: function () {
-    // TODO this messes up returning to a route via url, always makes
-    // the goecoded route load instead
     this.sendAction("searchMessage", this.get('searchTerm'));
   }.on('didInsertElement'),
+
+  triggerAutoComplete: function () {
+    var self = this;
+    Ember.run.debounce(null, function () {
+      getJSON('/api/weather/' + self.get('searchTerm')).then(function (data) {
+        window.console.log("the data inside the trigger autocomplete is %o ", data);
+        self.set('aProperty', data.location);
+      });
+    }, 2000)
+  }.observes('searchTerm'),
 
   actions: {
     search: function (val) {
