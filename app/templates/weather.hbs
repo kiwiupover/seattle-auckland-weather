@@ -1,1 +1,8 @@
-{{weather-current weather=model.weather days=model.days image=imageLarge}}
+<div class="row">
+  <div class="columns small-6 small-centered">
+    <h1>Whats the Weather in:</h1>
+    {{search-button searchMessage="searchHandler" searchTerm=model.searchTerm}}
+  </div>
+</div>
+
+{{outlet}}

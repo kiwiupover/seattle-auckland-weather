@@ -1,9 +1,10 @@
 export default DS.JSONSerializer.extend({
 
   extract: function(store, type, payload) {
-    var weatherCurrent = payload.weatherCurrent.current_observation,
+    var weatherConditions = payload.weatherConditions.current_observation,
         weatherForecastDay = payload.weatherForecast.forecast.txt_forecast.forecastday,
-        imageApi = payload.imageApi.photos;
+        imageApi = payload.imageApi.photos,
+        location = payload.location; // Remove
 
     var days = [];
     Ember.ArrayPolyfills.forEach.call(weatherForecastDay, function(day) {
@@ -11,35 +12,25 @@ export default DS.JSONSerializer.extend({
     });
 
     var weather = {
-          tempC: weatherCurrent.temp_c, 
-          tempF: weatherCurrent.temp_f,
-          iconUrl: weatherCurrent.icon_url,
-          temperatureString: weatherCurrent.temperature_string,
+          tempC: weatherConditions.temp_c,
+          tempF: weatherConditions.temp_f,
+          iconUrl: weatherConditions.icon_url,
+          temperatureString: weatherConditions.temperature_string,
         };
 
-    var realWeather =  Ember.merge(weather, weatherCurrent);
+    var realWeather =  Ember.merge(weather, weatherConditions);
 
     var finalReturn = {
       id: 1,
       weather: realWeather,
       days: days,
-      image: imageApi[0]
+      image: imageApi[0],
+      location: location
     };
 
 
-    window.console.log(finalReturn);
+    window.console.log("from the serializer", finalReturn);
     return finalReturn;
-
-
-    // var returnedPayload = {
-    //   id: 1,
-    //   weather: currentInfo.weather,
-    //   icon: currentInfo.icon
-    // }
-
-    // window.console.log(returnedPayload);
-    // return returnedPayload;
-
   }
 });
 
@@ -88,7 +79,7 @@ image =====================
       }
    ]
 }
-forecast ======== 
+forecast ========
 {
    "response":{
       "version":"0.1",

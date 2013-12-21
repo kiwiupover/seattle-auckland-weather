@@ -4,6 +4,7 @@
 // http://emberjs.com/guides/models
 
 export default DS.Model.extend({
+  location: DS.attr('string'),
   weather: DS.attr('string'),
   tempC: DS.attr('number'),
   tempF: DS.attr('number'),
@@ -16,7 +17,7 @@ export default DS.Model.extend({
   imageLarge: function(){
     var img = this.get('image.image_url'),
         i = img.split('/');
-    
+
     i[5] = '2048.jpg';
     return i.join('/');
   }.property('image.image_url')

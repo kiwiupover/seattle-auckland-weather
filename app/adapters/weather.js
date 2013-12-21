@@ -1,11 +1,11 @@
 var Promise = Ember.RSVP.Promise;
 
-function getJSON (url, dataType) {
+
+function getJSON (url) {
   return new Promise(function(resolve, reject) {
-    Ember.$.ajax({
-      type: 'GET', 
+    Ember.$.ajax({ // jquery + runloop + promises = fun times
+      type: 'GET',
       url: url,
-      dataType: dataType,
       success: function(data) {
         Ember.run(null, resolve, data);
       },
@@ -17,46 +17,46 @@ function getJSON (url, dataType) {
 }
 
 export default DS.Adapter.extend({
-  host: 'http://api.wunderground.com',
-  namespace: "api/a7fc8ca637aa4a97",
-  key: 'a7fc8ca637aa4a97',
 
-  // http://api.wunderground.com/api/a7fc8ca637aa4a97/conditions/q/CA/San_Francisco.json
-
-  buildCurrentWeatherUrl: function(type, id) {
-    return this.host + '/' + this.namespace + '/conditions/q/' + id + '.json';
-  },
-
-  buildForecastWeatherUrl: function(type, id) {
-    return this.host + '/' + this.namespace + '/forecast/q/' + id + '.json';
-  },
-  
-  build500pxUrl: function(type, id) {
-    var key = '&consumer_key=DhbTTmWU8YhxvMxHRkNe9mRjYgmacI7zPi0ELX3t';
-
-    return 'https://api.500px.com/v1/photos/search?term=Honolulu&only=landscapes&rpp=1' + key;
-  },
-
-  buildSearch: function () {
-    var url = "https://autocomplete.wunderground.com/aq?query=Portland";
-    return $.getJSON(url + '&cb=callbackfunc', function(json) {
-        window.console.log(json);
-    });
-  },
-
-  callbackfunc: function(){
-    alert('Josh');
-  },
-  
-  find: function(store, type, id) {
-    return Ember.RSVP.hash({
-      // weatherSearch: this.buildSearch(),
-      weatherCurrent: getJSON(this.buildCurrentWeatherUrl(type, id), 'jsonp'),
-      weatherForecast: getJSON(this.buildForecastWeatherUrl(type, id), 'jsonp'),
-      imageApi: getJSON(this.build500pxUrl(type, id), 'json')
-    });
-
-
+  find: function(store, type, term) {
+    return getJSON('/api/weather/' + term);
   }
 });
 
+
+
+// version two, needs run loop support though
+//
+// var RSVP = Ember.RSVP;
+//
+// function successHandler(resolve) {
+//   return function (data, textStatus, jqXHR) {
+//     resolve({
+//       data: data,
+//       textStatus: textStatus,
+//       jqXHR: jqXHR
+//     });
+//   };
+// }
+
+// function errorHandler(reject) {
+//   return function (data, textStatus, errorThrown) {
+//     reject({
+//       data: data,
+//       textStatus: textStatus,
+//       errorThrown: errorThrown
+//     });
+//   };
+// }
+
+// var ajax = {
+//   get: function get(url, options) {
+//     return new RSVP.Promise(function (resolve, reject) {
+//       options.success = successHandler(resolve);
+//       options.error = errorHandler(reject);
+//       Ember.$.ajax(url, options);
+//     });
+//   }
+// };
+
+// return ajax;
