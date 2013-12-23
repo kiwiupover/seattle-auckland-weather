@@ -16,7 +16,7 @@ function geoLocation() {
     window.console.log("inside getLatLng %o", latLng);
     return getCityNameP(latLng);
   });
-};
+}
 
 
 function getLatLng() {
@@ -48,7 +48,7 @@ function getCityNameP(latLng) {
         gLatlng = new window.google.maps.LatLng(latLng.lat, latLng.lng);
     geocoder.geocode({'latLng': gLatlng}, function (results, status) {
       window.console.log("inside geocoder %o", results);
-      if (status == window.google.maps.GeocoderStatus.OK) {
+      if (status === window.google.maps.GeocoderStatus.OK) {
         window.console.log("the geocode results are %o", results);
         var splits = results[4].formatted_address.split(", ", 2);
         var normalized = splits.join(", ");

@@ -1,4 +1,3 @@
-
 // Forecast implementation using Ember Data
 // https://github.com/emberjs/data
 // http://emberjs.com/guides/models
@@ -20,7 +19,16 @@ export default DS.Model.extend({
 
     i[5] = '2048.jpg';
     return i.join('/');
-  }.property('image.image_url')
+  }.property('image.image_url'),
+
+  displayDate: function(){
+    var day = moment.unix(this.get('weather.local_epoch'));
+    return day.format('MMM Do');
+  }.property('weather.local_epoch'),
+
+  eightDays: function(){
+    return this.get('days').slice(0,7);
+  }.property('days')
 });
 
 
