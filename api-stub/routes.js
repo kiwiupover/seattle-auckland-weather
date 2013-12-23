@@ -19,7 +19,7 @@ function buildWeatherUrl(type, lField) {
 function build500pxUrl(nameField){
   var key = '&consumer_key=' + apiKeys.fiveHundredPX;
 
-  return 'https://api.500px.com/v1/photos/search?term=' + nameField + '&only=landscapes&rpp=1' + key;
+  return 'https://api.500px.com/v1/photos/search?term=' + nameField + '&only=landscapes&sort=favorites_count&rpp=1' + key;
 }
 
 function weatherUrls(response) {
@@ -29,7 +29,7 @@ function weatherUrls(response) {
 
   var weatherUrls = {
     conditions: buildWeatherUrl('conditions', lField),
-    forecast: buildWeatherUrl('forecast', lField),
+    forecast: buildWeatherUrl('forecast10day', lField),
     image500pxAPI: build500pxUrl(nameField),
     location: nameField // remove
   }

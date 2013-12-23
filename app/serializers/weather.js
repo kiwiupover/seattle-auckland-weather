@@ -2,7 +2,7 @@ export default DS.JSONSerializer.extend({
 
   extract: function(store, type, payload) {
     var weatherConditions = payload.weatherConditions.current_observation,
-        weatherForecastDay = payload.weatherForecast.forecast.txt_forecast.forecastday,
+        weatherForecastDay = payload.weatherForecast.forecast.simpleforecast.forecastday,
         imageApi = payload.imageApi.photos,
         location = payload.location; // Remove
 
