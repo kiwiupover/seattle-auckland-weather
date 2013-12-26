@@ -15,7 +15,7 @@ export default Ember.Component.extend({
         window.console.log("the data inside the trigger autocomplete is %o ", data);
         self.set('aProperty', data.location);
       });
-    }, 2000)
+    }, 2000);
   }.observes('searchTerm'),
 
   actions: {
