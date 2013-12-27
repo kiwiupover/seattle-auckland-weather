@@ -48,9 +48,9 @@ module.exports = function(app) {
 
   console.log('Api keys: ', apiKeys);
 
-	app.get('/api/weather/:term', function (req, finalRes) {
-    var term = req.params.term
-      , wundergroundQueryUrl = 'http://autocomplete.wunderground.com/aq?query=' + term
+	app.get('/api/weather/:location', function (req, finalRes) {
+    var location = req.params.location
+      , wundergroundQueryUrl = 'http://autocomplete.wunderground.com/aq?query=' + location
 
     get(wundergroundQueryUrl).then(function (response) {
       return weatherUrls(response);
@@ -68,5 +68,15 @@ module.exports = function(app) {
     })
 
 	});
+
+  app.get('/api/search/:term', function(req, searchResults){
+    var term = req.params.term
+      , wundergroundQueryUrl = 'http://autocomplete.wunderground.com/aq?query=' + term;
+
+    get(wundergroundQueryUrl).then(function(response) {
+      searchResults.send(response);
+    })
+
+  });
 
 };

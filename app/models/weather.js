@@ -14,11 +14,13 @@ export default DS.Model.extend({
   image: DS.attr('string'),
 
   imageLarge: function(){
-    var img = this.get('image.image_url'),
+    if (this.get('image.image_url')) {
+      var img = this.get('image.image_url'),
         i = img.split('/');
 
-    i[5] = '2048.jpg';
-    return i.join('/');
+      i[5] = '2048.jpg';
+      return i.join('/');
+    }
   }.property('image.image_url'),
 
   displayDate: function(){

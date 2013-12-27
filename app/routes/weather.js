@@ -1,8 +1,9 @@
 export default Ember.Route.extend({
-  model: function () {
-    return {searchTerm: 'Seattle WA'};
-    // return Ember.RSVP.hash({searchTerm: geoLocation()});
+
+  model: function (params) {
+    return Ember.RSVP.hash({searchTerm: geoLocation()});
   },
+
   actions: {
     searchHandler: function (val) {
       window.console.log("the search term from the search handler is", val);
