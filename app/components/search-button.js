@@ -25,8 +25,7 @@ export default Ember.Component.extend({
           topOffset = inputOffsetTop - inputHeight,
 
           resultDropdown = this.$().find('#result-dropdown');
-
-      return resultDropdown.css({'top': topOffset, 'left': '15px'});
+      return resultDropdown.css({'top': inputOffsetTop, 'left': '15px'});
     }
   }.observes('results'),
 
