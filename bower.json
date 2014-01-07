@@ -10,7 +10,8 @@
     "ic-ajax": "~0.1",
     "foundation": "~5.0.2",
     "foggy": "master",
-    "momentjs": "~2.4.0"
+    "momentjs": "~2.4.0",
+    "ember-data-localstorage-adapter": "https://raw.github.com/rpflorence/ember-localstorage-adapter/master/localstorage_adapter.js"
   },
   "resolutions": {
     "ember": "~1.2.0",

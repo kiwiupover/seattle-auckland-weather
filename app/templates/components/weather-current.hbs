@@ -2,6 +2,7 @@
 <div class="weather-panel bg">
   <div class="small-12 columns">
     <h3>{{location}}</h3>
+    <a {{action 'saveLocation' location}}>Save Location</a>
   </div>
 </div>
 <div class="weather-stript">
@@ -22,17 +23,9 @@
       <div class="text-center">
         {{weather.wind_degrees}}&deg;
         |
-        {{weather.wind_gust_mph}}mph 
+        {{weather.wind_gust_mph}}mph
       </div>
     </div>
   </div>
-  {{!-- <ul class='inline-list'>
-    <li>temperatureString: {{weather.temperatureString}}</li>
-    <li>{{icon-name weather.icon}}</li>
-    <li>tempC: {{weather.tempC}}</li>
-    <li>tempF: {{weather.tempF}}</li>
-    <li>wind dir: {{weather.wind_degrees}}</li>
-    <li>wind spd: {{weather.wind_gust_mph}}</li>
-  </ul> --}}
   {{weather-forecast days=days}}
 </div>
