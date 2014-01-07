@@ -1,16 +1,48 @@
+import getJSON from "appkit/utils/get-json";
+
 export default Ember.Component.extend({
   searchTerm: null,
+  results: [],
 
   triggerSearch: function () {
-    // TODO this messes up returning to a route via url, always makes
-    // the goecoded route load instead
     this.sendAction("searchMessage", this.get('searchTerm'));
   }.on('didInsertElement'),
 
+  triggerAutoComplete: function () {
+    var self = this;
+    Ember.run.debounce(null, function () {
+      getJSON('/api/search/' + self.get('searchTerm')).then(function (data) {
+        self.set('results', self._parseResults(data));
+      });
+    }, 400);
+  }.observes('searchTerm'),
+
+  openResults: function() {
+    if (this.get('results').length > 1) {
+      var input = this.$().find('input'),
+          inputOffsetTop = input.offset().top,
+          inputHeight = input.outerHeight(),
+          topOffset = inputOffsetTop - inputHeight,
+
+          resultDropdown = this.$().find('#result-dropdown');
+      return resultDropdown.css({'top': inputOffsetTop, 'left': '15px'});
+    }
+  }.observes('results'),
+
+  closeResultDropdown: function(){
+    this.$('#result-dropdown').css({'left': '-999999px'});
+  },
+
   actions: {
     search: function (val) {
-      window.console.log("the search term in search-biutton.js is ", val);
+      this.closeResultDropdown();
+      this.set('searchTerm', val);
       this.sendAction("searchMessage", val);
     }
+  },
+
+  _parseResults: function(data){
+    var parsedData = JSON.parse(data[1]);
+    return parsedData.RESULTS;
   }
 });

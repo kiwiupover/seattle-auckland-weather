@@ -1,5 +1,8 @@
 export default Ember.Route.extend({
   model: function (params) {
-    return this.store.find('weather', params.term);
+    var model = this.store.find('weather', params.term);
+    window.console.log("from search route %o", model);
+    return model;
   }
+
 });

@@ -19,7 +19,10 @@ function buildWeatherUrl(type, lField) {
 function build500pxUrl(nameField){
   var key = '&consumer_key=' + apiKeys.fiveHundredPX;
 
-  return 'https://api.500px.com/v1/photos/search?term=' + nameField + '&only=landscapes&sort=favorites_count&rpp=1' + key;
+  return 'https://api.500px.com/v1/photos/search?term=' +
+         nameField +
+         '&only=landscapes&sort=favorites_count&rpp=1' +
+         key;
 }
 
 function weatherUrls(response) {
@@ -27,15 +30,15 @@ function weatherUrls(response) {
     , lField = body.RESULTS[0].l
     , nameField = body.RESULTS[0].name;
 
-  var weatherUrls = {
+  var ret = {
     conditions: buildWeatherUrl('conditions', lField),
     forecast: buildWeatherUrl('forecast10day', lField),
     image500pxAPI: build500pxUrl(nameField),
     location: nameField // remove
   }
 
-  console.log(weatherUrls);
-  return weatherUrls
+  console.log("the ret is:", ret);
+  return ret
 }
 
 function asJSON(responsePromise) {
@@ -48,9 +51,9 @@ module.exports = function(app) {
 
   console.log('Api keys: ', apiKeys);
 
-	app.get('/api/weather/:term', function (req, finalRes) {
-    var term = req.params.term
-      , wundergroundQueryUrl = 'http://autocomplete.wunderground.com/aq?query=' + term
+	app.get('/api/weather/:location', function (req, finalRes) {
+    var location = req.params.location
+      , wundergroundQueryUrl = 'http://autocomplete.wunderground.com/aq?query=' + location
 
     get(wundergroundQueryUrl).then(function (response) {
       return weatherUrls(response);
@@ -68,5 +71,15 @@ module.exports = function(app) {
     })
 
 	});
+
+  app.get('/api/search/:term', function(req, searchResults){
+    var term = req.params.term
+      , wundergroundQueryUrl = 'http://autocomplete.wunderground.com/aq?query=' + term;
+
+    get(wundergroundQueryUrl).then(function(response) {
+      searchResults.send(response);
+    })
+
+  });
 
 };

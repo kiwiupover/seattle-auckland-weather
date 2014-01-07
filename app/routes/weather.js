@@ -1,8 +1,9 @@
 export default Ember.Route.extend({
-  model: function () {
-    return {searchTerm: 'Seattle WA'};
-    // return Ember.RSVP.hash({searchTerm: geoLocation()});
+
+  model: function (params) {
+    return Ember.RSVP.hash({searchTerm: geoLocation()});
   },
+
   actions: {
     searchHandler: function (val) {
       window.console.log("the search term from the search handler is", val);
@@ -50,7 +51,7 @@ function getCityNameP(latLng) {
       window.console.log("inside geocoder %o", results);
       if (status === window.google.maps.GeocoderStatus.OK) {
         window.console.log("the geocode results are %o", results);
-        var splits = results[4].formatted_address.split(", ", 2);
+        var splits = results[3].formatted_address.split(", ", 2);
         var normalized = splits.join(", ");
         window.console.log("The split results are %o", normalized);
         resolve(normalized);
