@@ -10,17 +10,21 @@
   top: -10px;
   left: -10px;
   padding: 50px 20px;
+  -webkit-transform: translatez(0);
+  -moz-transform: translatez(0);
+  -ms-transform: translatez(0);
+  -o-transform: translatez(0);
+  transform: translatez(0);
 }
 
 .weather-panel {
   @include grid-row;
   @include radius($global-radius $global-radius 0 0);
-  margin-top: 50px;
   border: none;
   color: white;
   font-weight: 700;
   text-shadow: 0px 0px 2px black;
-  
+
   h1, h2, h3, h4, h5 ,h6 {
     color: white;
     font-weight: 700;
