@@ -10,6 +10,11 @@
   top: -10px;
   left: -10px;
   padding: 50px 20px;
+  -webkit-transform: translatez(0);
+  -moz-transform: translatez(0);
+  -ms-transform: translatez(0);
+  -o-transform: translatez(0);
+  transform: translatez(0);
 }
 
 .weather-panel {
