@@ -51,7 +51,7 @@ function getCityNameP(latLng) {
       window.console.log("inside geocoder %o", results);
       if (status === window.google.maps.GeocoderStatus.OK) {
         window.console.log("the geocode results are %o", results);
-        var splits = results[3].formatted_address.split(", ", 1);
+        var splits = results[5].formatted_address.split(", ", 2);
         var normalized = splits.join(", ");
         window.console.log("The split results are %o", normalized);
         resolve(normalized);

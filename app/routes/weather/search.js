@@ -6,10 +6,9 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    handleSaveLocation: function (location) {
-      window.alert('hello' + ' ' + location);
-      // this.store.
-    },
+    // handleSaveLocation: function (location) {
+    //   this.send('saveLocation');
+    // },
   }
 
 });

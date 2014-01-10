@@ -1,0 +1,6 @@
+<ul class='inline-list'>
+  {{#each}}
+  <li>{{#link-to 'weather.search' this.id}}{{this.location}}{{/link-to}}</li>
+  {{/each}}
+</ul>
+{{outlet}}
