@@ -1,6 +1,7 @@
 import getJSON from "appkit/utils/get-json";
 
 export default Ember.Component.extend({
+  classNames: 'search',
   searchTerm: null,
   results: [],
 
@@ -19,13 +20,16 @@ export default Ember.Component.extend({
 
   openResults: function() {
     if (this.get('results').length > 1) {
+
       var input = this.$().find('input'),
           inputOffsetTop = input.offset().top,
+          inputOffsetLeft = input.offset().left,
           inputHeight = input.outerHeight(),
-          topOffset = inputOffsetTop - inputHeight,
+          topOffset = inputOffsetTop + inputHeight,
 
           resultDropdown = this.$().find('#result-dropdown');
-      return resultDropdown.css({'top': inputOffsetTop, 'left': '15px'});
+
+      return resultDropdown.css({'top': topOffset, 'left': inputOffsetLeft});
     }
   }.observes('results'),
 
