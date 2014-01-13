@@ -3,6 +3,7 @@
   input[type='text'] {
     @include grid-column($columns:9);
     margin-bottom: 0;
+    border-radius: 4px 0 0 0;
   }
   button {
     @include button($padding: rem-calc(10));
@@ -11,5 +12,6 @@
     padding-top: 12px;
     padding-bottom: 11px;
     margin-bottom: 0;
+    border-radius: 0 4px 0 0;
   }
 }

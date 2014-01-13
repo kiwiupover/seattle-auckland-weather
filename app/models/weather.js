@@ -18,8 +18,10 @@ export default DS.Model.extend({
       var img = this.get('image.image_url'),
         i = img.split('/');
 
-      i[5] = '2048.jpg';
+      i[5] = '5.jpg';
       return i.join('/');
+    } else {
+      return '/assets/images/earth.jpg';
     }
   }.property('image.image_url'),
 
