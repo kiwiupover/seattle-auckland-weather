@@ -1,7 +1,10 @@
 export default Ember.Route.extend({
 
   model: function (params) {
-    return Ember.RSVP.hash({searchTerm: geoLocation()});
+    // return Ember.RSVP.hash({searchTerm: geoLocation()});
+    var model = this.store.find('weather', params.location_id);
+    window.console.log("Weather model %o", model);
+    return model;
   },
 
   actions: {

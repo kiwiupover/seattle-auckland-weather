@@ -52,8 +52,10 @@ module.exports = function(app) {
   console.log('Api keys: ', apiKeys);
 
 	app.get('/api/weather/:location', function (req, finalRes) {
+    console.log('req is', req, req.params);
     var location = req.params.location
-      , wundergroundQueryUrl = 'http://autocomplete.wunderground.com/aq?query=' + location
+      , l = location.split('-').join(', ')
+      , wundergroundQueryUrl = 'http://autocomplete.wunderground.com/aq?query=' + l
 
     get(wundergroundQueryUrl).then(function (response) {
       return weatherUrls(response);

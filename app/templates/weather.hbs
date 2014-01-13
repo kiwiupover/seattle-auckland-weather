@@ -1,4 +1,12 @@
 <div class="row">
   {{search-button searchMessage="searchHandler" searchTerm=model.searchTerm}}
 </div>
+
+{{weather-current location=model.location
+                  weather=model.weather
+                  days=model.eightDays
+                  image=imageLarge
+                  displayDate=displayDate
+                  saveLocationHandler="handleSaveLocation"}}
+
 {{outlet}}
