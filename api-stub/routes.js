@@ -34,7 +34,8 @@ function weatherUrls(response) {
     conditions: buildWeatherUrl('conditions', lField),
     forecast: buildWeatherUrl('forecast10day', lField),
     image500pxAPI: build500pxUrl(nameField),
-    location: nameField // remove
+    location: nameField,
+    searchField: lField
   }
 
   console.log("the ret is:", ret);
@@ -64,7 +65,8 @@ module.exports = function(app) {
         weatherConditions: asJSON(get(weatherUrls.conditions)),
         weatherForecast: asJSON(get(weatherUrls.forecast)),
         imageApi: asJSON(get(weatherUrls.image500pxAPI)),
-        location: weatherUrls.location // remove
+        location: weatherUrls.location,
+        searchField: weatherUrls.searchField
       })
     }).then(function(result) {
       finalRes.send(result)
@@ -73,6 +75,9 @@ module.exports = function(app) {
     })
 
 	});
+
+  getWeatherUrl(term)
+  .then(getWeather)
 
   app.get('/api/search/:term', function(req, searchResults){
     var term = req.params.term

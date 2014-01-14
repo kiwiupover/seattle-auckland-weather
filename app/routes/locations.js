@@ -7,16 +7,16 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    handleSaveLocation: function(location){
-      var id = location.split(", ").join('-').toLocaleLowerCase(),
-          saveLocation,
-          locationData = {
-            id: id,
-            location: location
-          };
+    handleSaveLocation: function(weather){
+      var id = weather.location.split(", ").join('-').toLowerCase();
 
-      saveLocation = this.store.createRecord('location', locationData);
-      saveLocation.save();
+      var createdLocation = this.store.createRecord('location', {
+        id: id,
+        location: weather.location,
+        searchField: weather.searchField
+      });
+
+      createdLocation.save();
     }
   }
 });

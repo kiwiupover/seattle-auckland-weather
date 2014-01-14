@@ -1,5 +1,6 @@
 export default Ember.Component.extend({
   weather: null,
+  weatherDetails: Ember.computed.alias('weather.weather'),
 
   setupBackGroundImages: function(){
     this._setImageBackGround(this.get('image'));
