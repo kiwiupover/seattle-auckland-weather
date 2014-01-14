@@ -76,9 +76,6 @@ module.exports = function(app) {
 
 	});
 
-  getWeatherUrl(term)
-  .then(getWeather)
-
   app.get('/api/search/:term', function(req, searchResults){
     var term = req.params.term
       , wundergroundQueryUrl = 'http://autocomplete.wunderground.com/aq?query=' + term;
