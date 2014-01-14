@@ -6,8 +6,12 @@ export default Ember.Route.extend({
     var model = this.store.find('weather', params.location_id);
     window.console.log("Weather model %o", model);
     return model;
-
   },
+
+  // serialize: function(model) {
+  //   // debugger;
+  //   return { location_id: model.get('id') };
+  // },
 
   actions: {
     searchHandler: function (val) {

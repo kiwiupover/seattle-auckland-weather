@@ -19,9 +19,8 @@ export default DS.JSONSerializer.extend({
           temperatureString: weatherConditions.temperature_string,
         };
 
-
     var ret = {
-      id: 1,
+      id: location.split(", ").join('-').toLowerCase(),
       weather: Ember.merge(weather, weatherConditions),
       days: days,
       image: imageApi[0],
