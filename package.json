@@ -46,7 +46,8 @@
     "karma-qunit": "~0.0.3",
     "karma-coverage": "~0.0.3",
     "karma-phantomjs-launcher": "~0.0.2",
-    "grunt-sass": "~0.9.0"
+    "grunt-sass": "~0.9.0",
+    "connect-livereload": "~0.3.2"
   },
   "dependencies": {
     "request": "~2.30.0",
