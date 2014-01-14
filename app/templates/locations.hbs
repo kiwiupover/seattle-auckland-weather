@@ -1,3 +1,9 @@
 {{partial 'nav'}}
 
+{{#each location in model}}
+  <div class='panel'>
+    {{location.location}}
+  </div>
+{{/each}}
+
 {{outlet}}
