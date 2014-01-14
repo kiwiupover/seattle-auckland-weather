@@ -1,0 +1,11 @@
+{{partial 'nav'}}
+
+{{#each location in model}}
+  <div class='panel'>
+    {{location.location}}
+    {{location.searchField}}
+    {{location.weather.id}}
+  </div>
+{{/each}}
+
+{{outlet}}

@@ -1,7 +1,6 @@
 <div class="row">
-  <div class="columns small-6 small-centered">
-    {{search-button searchMessage="searchHandler" searchTerm=model.searchTerm}}
-  </div>
+  {{search-button searchMessage="searchHandler" searchTerm=model.searchTerm}}
 </div>
 
-{{outlet}}
+{{weather-current weather=model
+                  saveLocationHandler="handleSaveLocation"}}

@@ -11,7 +11,7 @@ var apiKeys = {
 function buildWeatherUrl(type, lField) {
   return 'http://api.wunderground.com/api/' +
           apiKeys.wunderground + '/' +
-          type + '/' +
+          type +
           lField + '/' +
           '.json'
 }
@@ -34,7 +34,8 @@ function weatherUrls(response) {
     conditions: buildWeatherUrl('conditions', lField),
     forecast: buildWeatherUrl('forecast10day', lField),
     image500pxAPI: build500pxUrl(nameField),
-    location: nameField // remove
+    location: nameField,
+    searchField: lField
   }
 
   console.log("the ret is:", ret);
@@ -52,8 +53,13 @@ module.exports = function(app) {
   console.log('Api keys: ', apiKeys);
 
 	app.get('/api/weather/:location', function (req, finalRes) {
+    console.log('req is', req.params);
     var location = req.params.location
-      , wundergroundQueryUrl = 'http://autocomplete.wunderground.com/aq?query=' + location
+      , l = location.split('-').join(', ')
+      , wundergroundQueryUrl = 'http://autocomplete.wunderground.com/aq?query=' + l
+
+    console.log('req after is', l);
+    console.log('wundergroundApiUrl is', wundergroundQueryUrl);
 
     get(wundergroundQueryUrl).then(function (response) {
       return weatherUrls(response);
@@ -62,7 +68,8 @@ module.exports = function(app) {
         weatherConditions: asJSON(get(weatherUrls.conditions)),
         weatherForecast: asJSON(get(weatherUrls.forecast)),
         imageApi: asJSON(get(weatherUrls.image500pxAPI)),
-        location: weatherUrls.location // remove
+        location: weatherUrls.location,
+        searchField: weatherUrls.searchField
       })
     }).then(function(result) {
       finalRes.send(result)

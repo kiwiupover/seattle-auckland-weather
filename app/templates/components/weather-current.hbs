@@ -1,31 +1,33 @@
 <section role="main" id='bg' class='bg'></section>
 <div class="weather-panel bg">
   <div class="small-12 columns">
-    <h3>{{location}}</h3>
-    <a {{action 'saveLocation' location}}>Save Location</a>
+    <h3>{{weather.location}}</h3>
+    <a {{action 'saveLocation' weather}}>Save Location</a>
   </div>
 </div>
 <div class="weather-stript">
   <div class="current-details">
     <div class="temp-date">
       <div class="temp">
-        {{weather.tempF}}
+        {{weatherDetails.tempF}}
         &deg;
       </div>
       <div class="display-date">
-        {{displayDate}}
+        {{weather.displayDate}}
       </div>
     </div>
     <div class="icon-wind">
       <div class="large-icon">
-        {{icon-name weather.icon}}
+        {{icon-name weatherDetails.icon}}
       </div>
       <div class="text-center">
-        {{weather.wind_degrees}}&deg;
+        <span {{bind-attr class="weather.windDirection"}}></span>{{weather.windDirection}}
         |
-        {{weather.wind_gust_mph}}mph
+        {{weatherDetails.wind_gust_mph}}mph
       </div>
     </div>
   </div>
-  {{weather-forecast days=days}}
+  {{weather-forecast days=weather.days}}
 </div>
+
+

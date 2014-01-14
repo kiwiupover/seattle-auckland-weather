@@ -4,8 +4,9 @@ export default DS.JSONSerializer.extend({
     var weatherConditions = payload.weatherConditions.current_observation,
         weatherForecastDay = payload.weatherForecast.forecast.simpleforecast.forecastday,
         imageApi = payload.imageApi.photos,
-        location = payload.location; // Remove
+        location = payload.location;
 
+    // TODO: map
     var days = [];
     Ember.ArrayPolyfills.forEach.call(weatherForecastDay, function(day) {
       days.pushObject(day);
@@ -18,19 +19,18 @@ export default DS.JSONSerializer.extend({
           temperatureString: weatherConditions.temperature_string,
         };
 
-    var realWeather =  Ember.merge(weather, weatherConditions);
-
-    var finalReturn = {
-      id: 1,
-      weather: realWeather,
+    var ret = {
+      id: location.split(", ").join('-').toLowerCase(),
+      weather: Ember.merge(weather, weatherConditions),
       days: days,
       image: imageApi[0],
-      location: location
+      location: location,
+      searchField: payload.searchField
     };
 
 
-    window.console.log("from the serializer", finalReturn);
-    return finalReturn;
+    window.console.log("from the serializer", ret);
+    return ret;
   }
 });
 

@@ -1,21 +1,25 @@
 var get = Ember.get, set = Ember.set, doc = document;
- 
+
 export default Ember.Component.extend({
   items: null,
   valuePath: 'value',
   labelPath: 'label',
   value: null,
   selected: null,
- 
+
   tagName: 'select',
- 
+
   didInsertElement: function () {
     var self = this;
     this.$().on('change', function () {
       set(self, 'value', this.value);
     });
   },
- 
+
+  nameMe: function() {
+
+  }.on('didInsertElement'),
+
   valueDidChange: function () {
     var items = this.items, value = this.value, selected = null;
     if (value && items) {
@@ -23,7 +27,7 @@ export default Ember.Component.extend({
     }
     set(this, 'selected', selected);
   }.observes('value').on('init'),
- 
+
   itemsWillChange: function () {
     var items = this.items;
     if (items) {
@@ -31,7 +35,7 @@ export default Ember.Component.extend({
       this.arrayWillChange(items, 0, get(items, 'length'), 0);
     }
   }.observesBefore('items').on('willDestroyElement'),
- 
+
   itemsDidChange: function () {
     var items = this.items;
     if (items) {
@@ -39,7 +43,7 @@ export default Ember.Component.extend({
       this.arrayDidChange(items, 0, 0, get(items, 'length'));
     }
   }.observes('items').on('didInsertElement'),
- 
+
   arrayWillChange: function (items, start, removeCount, addCount) {
     var select = get(this, 'element');
     var options = select.childNodes;
@@ -47,7 +51,7 @@ export default Ember.Component.extend({
       select.removeChild(options[i]);
     }
   },
- 
+
   arrayDidChange: function (items, start, removeCount, addCount) {
     var select = get(this, 'element');
     for (var i = start, l = start+addCount; i < l; i++) {
