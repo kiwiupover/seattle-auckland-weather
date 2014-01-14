@@ -6,6 +6,12 @@ export default Ember.Route.extend({
     return model;
   },
 
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    debugger;
+    this.controllerFor('locationsIndex').set('content', model);
+  },
+
   actions: {
     handleSaveLocation: function(weather){
 

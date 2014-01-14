@@ -1,0 +1,8 @@
+.weather-list {
+  @include grid-column(12);
+  background: #333;
+  border-bottom: 5px solid darken(#333, 10%);
+  h3 {
+    color: white;
+  }
+}
