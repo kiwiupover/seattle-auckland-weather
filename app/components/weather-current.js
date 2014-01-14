@@ -3,12 +3,12 @@ export default Ember.Component.extend({
   weatherDetails: Ember.computed.alias('weather.weather'),
 
   setupBackGroundImages: function(){
-    this._setImageBackGround(this.get('image'));
+    this._setImageBackGround(this.get('weather.imageLarge'));
   }.on('didInsertElement'),
 
   setImage: function(){
-    this._setImageBackGround(this.get('image'));
-  }.observes('image'),
+    this._setImageBackGround(this.get('weather.imageLarge'));
+  }.observes('weather.imageLarge'),
 
   actions: {
     saveLocation: function (location) {
