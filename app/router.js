@@ -4,8 +4,6 @@ Router.map(function() {
   this.resource('locations', { path: '/' }, function() {
     this.resource('weather', { path: 'weather/:location_id'});
   });
-  this.route('auckland');
-  this.route('honolulu');
 });
 
 Router.reopen({
