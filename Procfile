@@ -1,1 +1,1 @@
-web: node api-stub/server.js
+web: node server/server.js

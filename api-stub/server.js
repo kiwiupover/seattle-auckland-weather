@@ -6,7 +6,7 @@ var express = require('express')
 server.use(express.logger('dev'));
 server.use(express.bodyParser());
 server.use(express.methodOverride());
-require('./routes')(server);
+require('../api/routes')(server);
 
 server.listen(port, function () {
   console.log("Express server listening on port " + port);
