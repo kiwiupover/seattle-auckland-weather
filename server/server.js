@@ -10,16 +10,8 @@ server
   .use(express.logger())
   .use(express.bodyParser())
   .use(express.methodOverride())
-
-server.get('/dist', function (req, res) {
-  res.redirect('/')
-})
-server.get('/dist/index.html', function (req, res) {
-  res.redirect('/')
-})
-
-// serve everything
-server.use('/', express.static(serverBase))
+  .get('/dist/index.html', function (req, res) { res.redirect('/') })
+  .use('/', express.static(serverBase))
 
 require('../api/routes')(server)
 
