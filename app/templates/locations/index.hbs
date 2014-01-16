@@ -1,7 +1,5 @@
-{{#each location in model}}
-  <div class='panel'>
-    {{location.location}}
-    {{location.searchField}}
-    {{location.weather.id}}
-  </div>
-{{/each}}
+<ul class="no-bullet columns small-8 small-centered">
+  {{#each location in model}}
+    {{weather-list location=location  transitionHandler="handleTransition"}}
+  {{/each}}
+</ul>

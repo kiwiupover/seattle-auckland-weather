@@ -32,6 +32,8 @@ export default DS.JSONSerializer.extend({
     window.console.log("from the serializer", ret);
     return ret;
   }
+
+
 });
 
 /*
