@@ -19,6 +19,10 @@ export default Ember.Route.extend({
       });
 
       createdLocation.save();
+    },
+
+    handleTransition: function(location){
+      this.transitionTo('weather', location);
     }
   }
 });
